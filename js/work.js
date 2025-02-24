@@ -1,21 +1,25 @@
 //1.
-const openButton = document.querySelector(".open-button");
-console.log(openButton);
-const closeButton = document.querySelector(".close-button");
-console.log(closeButton);
-const backdrop = document.querySelector(".js-backdrop");
-openButton.addEventListener("click", () => {
-  backdrop.style.opacity = "1";
-  backdrop.style.visibility = "visible";
-  backdrop.style.pointerEvents = "initial";
+document.addEventListener("DOMContentLoaded", () => {
+  const openBtn = document.querySelector('[data-action="open-modal"]');
+  const closeBtn = document.querySelector('[data-action="close-modal"]');
+  const backdrop = document.querySelector(".js-backdrop");
+
+  openBtn.addEventListener("click", () => {
+    document.body.classList.add("show-modal");
+  });
+
+  closeBtn.addEventListener("click", () => {
+    document.body.classList.remove("show-modal");
+  });
+
+  backdrop.addEventListener("click", (event) => {
+    if (event.target === backdrop) {
+      document.body.classList.remove("show-modal");
+    }
+  });
 });
 
-//2.
-closeButton.addEventListener("click", () => {
-  backdrop.style.opacity = "0";
-  backdrop.style.visibility = "hidden";
-  backdrop.style.pointerEvents = "none";
-});
+
 
 //4.
 const input = document.getElementById("name-input");
@@ -31,10 +35,9 @@ input.addEventListener("input", (event) => {
 });
 
 // //5.
-// const fontSizeControl = document.querySelector("font-size-control");
-// const textElement = document.querySelector("text");
-// fontSizeControl.value = 16;
-// textElement.style.fontSize = `${fontSizeControl.value}`;
-// fontSizeControl.addEventListener("input", (event) => {
-//   textElement.style.fontSize = `${event.target.value}`;
-// });
+const sizeControl = document.querySelector(".big-text");
+const textElement = document.querySelector(".text");
+
+sizeControl.addEventListener("input", () => {
+  textElement.style.fontSize = `${sizeControl.value}px`;
+});
